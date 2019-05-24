@@ -36,7 +36,7 @@ import { QueueJobProcessor } from './queue-job.processor';
 
 @Module({
     imports: [
-        BullModule.register(options);
+        BullModule.register(options),
     ],
     providers: [QueueJobProcessor],
 })
@@ -71,7 +71,7 @@ export class BullConfigService implements BullOptionsFactory {
 
   constructor(private readonly config: ConfigService) {}
 
-  createIoredisOptions(name?: string): BullModuleOptions {
+  createBullOptions(name?: string): BullModuleOptions {
       
     return {
       name,
@@ -96,7 +96,7 @@ export class BullConfigService implements BullOptionsFactory {
 }
 ```
 
-Importing inside services
+Example usage inside services
 ```typescript
 import { Injectable } from '@nestjs/common';
 import { InjectQueue } from '@mobizerg/nest-bull';
@@ -114,7 +114,7 @@ export class BullService {
 }
 ```
 
-Queue job processor
+Example queue job processor
 ```typescript
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectQueue } from '@mobizerg/nest-bull';
